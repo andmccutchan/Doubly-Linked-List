@@ -27,15 +27,18 @@ class DoublyLinkedList
         int size;
 
     public:
-        void prepend ( const T &item );
-        void append ( const T &item );
-        void insert ( const T &item, int index );
-        void remove ( int index );
-        int search ( const T &item ) const;
-        T & operation[] ( int index );
-        int length ( void ) const;
-        bool empty ( void ) const;
-        DoublyLinkedList<T> concat (const DoublyLinkedList<T> &list ) const;
+                DoublyLinkedList    (void);
+                DoublyLinkedList    (const DoublyLinkedList<T> &list);
+                ~DoublyLinkedList   (void);
+        void    prepend             ( const T &item );
+        void    append              ( const T &item );
+        void    insert              ( const T &item, int index );
+        void    remove              ( int index );
+        int     search              ( const T &item ) const;
+                T & operation[]     ( int index );
+        int     length              ( void ) const;
+        bool    empty               ( void ) const;
+        DoublyLinkedList<T> concat  (const DoublyLinkedList<T> &list ) const;
 
 
         //friend function to overload the << operator to display our list 
@@ -45,4 +48,5 @@ class DoublyLinkedList
         }
 };
 
+#include "DoublyLinkedList.cpp"
 #endif
