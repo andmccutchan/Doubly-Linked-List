@@ -178,7 +178,7 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
 		}
 		
 		newNode->next = ptr->next;
-		newNode->prev = ptr->prev;
+		newNode->prev = ptr;
 		ptr->next = newNode;
 		size++;
 	}
