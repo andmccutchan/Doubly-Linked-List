@@ -34,4 +34,11 @@ int main(void){
     cout << list1 << endl;
     cout << list2 << endl;
 
+    list2.insert(5, 1);
+    cout << "Insert" << endl;
+    cout << "list2: " << list2 << endl;
+    list2.remove(8);
+    cout << "Remove: " << endl;
+    cout << "list2:" << list2 << endl;
+
 }

@@ -157,7 +157,31 @@ void DoublyLinkedList<T>::append ( const T &data )
 template <class T>
 void DoublyLinkedList<T>::insert ( const T &data, int index )
 {
+    	if (index < 0 || index > length())
+	{
+		cout << "Index out of range" << endl;
+        exit(0);
+	}
 
+	Node* newNode = createNewNode(data);
+	if (index == 0)
+	{
+		newNode->next = head;
+		head = newNode;
+	}
+	
+
+	else {
+		Node* ptr = head;
+		for (int i = 0; i < index - 1; i++) {
+			ptr = ptr->next;
+		}
+		
+		newNode->next = ptr->next;
+		newNode->prev = ptr->prev;
+		ptr->next = newNode;
+		size++;
+	}
 }
 
 //
@@ -165,7 +189,37 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
 template <class T>
 void DoublyLinkedList<T>::remove ( int index )
 {
-    
+    if (index < 0 || index >= length())
+	{
+		cout << "Index out of range" << endl;
+        exit(0);
+	}
+
+	if (index == 0)
+	{
+		Node* temp = head;
+		head = head->next;
+		if (head != nullptr) {
+			head->prev = nullptr;
+		}
+		delete temp;
+	}
+	
+	else {
+		Node* ptr = head;
+		for (int i = 0; i < index - 1; i++) {
+			ptr = ptr->next;
+		}
+
+		Node* temp = ptr->next;
+		ptr->next = temp->next;
+
+		// check to see if it is the last node
+		if (temp->next != nullptr){ 
+			temp->next->prev = ptr;
+		}
+		delete temp;
+	}
 }
 
 //
