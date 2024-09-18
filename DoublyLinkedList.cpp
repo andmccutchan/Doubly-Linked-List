@@ -179,7 +179,7 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
     }
 
     Node *ptr = head;
-    for (int i = 0; i < index - 1 && ptr != nullptr; i++) {
+    for (int i = 0; i < index - 1; i++) {
         ptr = ptr->next;
     }
 
