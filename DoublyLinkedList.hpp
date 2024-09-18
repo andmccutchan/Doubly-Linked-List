@@ -18,27 +18,28 @@ class DoublyLinkedList
         struct Node
         {
             T data;
-            Node* next;
-            Node* prev;
+            Node *next;
+            Node *prev;
         };
         Node* createNewNode(const T &data); //Helper function to create new node with data
-        Node* head;
-        Node* tail;
+        Node *head;
+        Node *tail;
         int size;
 
     public:
                 DoublyLinkedList    (void);
                 DoublyLinkedList    (const DoublyLinkedList<T> &list);
                 ~DoublyLinkedList   (void);
-        void    prepend             ( const T &data );
-        void    append              ( const T &data );
-        void    insert              ( const T &data, int index );
-        void    remove              ( int index );
-        int     search              ( const T &data ) const;
-                T & operator[]     ( int index );
-        int     length              ( void ) const;
-        bool    empty               ( void ) const;
-        DoublyLinkedList<T> concat  (const DoublyLinkedList<T> &list ) const;
+        void    prepend             (const T &data);
+        void    append              (const T &data);
+        void    insert              (const T &data, int index);
+        void    remove              (int index);
+        int     search              (const T &data) const;
+                T & operator[]      (int index);
+        int     length              (void) const;
+        bool    empty               (void) const;
+        DoublyLinkedList<T> operator= (const DoublyLinkedList<T> &list);
+        DoublyLinkedList<T> concat  (const DoublyLinkedList<T> &list) const;
 
 
         //friend function to overload the << operator to display our list 
@@ -49,9 +50,11 @@ class DoublyLinkedList
             while (ptr != NULL)
             {
                 if (ptr -> next != NULL){
-                    os << ptr -> data << ", ";}
+                    os << ptr -> data << ", ";
+                }
                 else{
-                    os << ptr -> data;}
+                    os << ptr -> data;
+                }
                 ptr = ptr -> next;
             }
             os << "]";
