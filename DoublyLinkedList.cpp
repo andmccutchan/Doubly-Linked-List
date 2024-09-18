@@ -20,11 +20,11 @@ using namespace std;
 template <class T>
         typename DoublyLinkedList<T>::Node* DoublyLinkedList<T>::createNewNode(const T &data)
 {
-        Node* newnode = new Node;
-        newnode -> next = nullptr;
-        newnode -> prev = nullptr;
-        newnode -> data = data;
-        return newnode;
+	Node* newnode = new Node;
+	newnode -> next = nullptr;
+	newnode -> prev = nullptr;
+	newnode -> data = data;
+	return newnode;
 }
 //==============================================================
 //default constructor
@@ -37,8 +37,9 @@ template <class T>
 template <class T>
         DoublyLinkedList<T>::DoublyLinkedList (void)
 {
-        head = nullptr;
-        tail = nullptr;
+	head = nullptr;
+	tail = nullptr;
+	size = 0;
 }
 
 //==============================================================
@@ -53,25 +54,29 @@ template <class T>
 template <class T>
         DoublyLinkedList<T>::DoublyLinkedList (const DoublyLinkedList<T> &list)
 {
-        head = nullptr;
-        Node *ptr = list.head;
-        //create the head
-        if(ptr != nullptr){
-                //create newnode and copy data
-                Node *newnode = createNewNode(ptr -> data);
-                head = newnode;
-                ptr = ptr -> next;
-        }
-        //Creating other nodes
-        Node *track = head;
-        while (ptr != nullptr){
-                Node *newnode = createNewNode(ptr -> data);
-                track -> next = newnode; //link the newnode
-                ptr = ptr -> next;
-                track = track -> next;
-                tail = newnode; //update new tail
-        }
-        
+	head = nullptr;
+	tail = nullptr;
+	size = 0;
+	Node *ptr = list.head;
+	//create the head
+	if(ptr != nullptr){
+		//create newnode and copy data
+		Node *newnode = createNewNode(ptr -> data);
+		head = newnode;
+		ptr = ptr -> next;
+		size++;
+	}
+	//Creating other nodes
+	Node *track = head;
+	while (ptr != nullptr){
+		Node *newnode = createNewNode(ptr -> data);
+		track -> next = newnode; //link the newnode
+		ptr = ptr -> next;
+		track = track -> next;
+		tail = newnode; //update new tail
+		size++;
+	}
+	
 }
 
 //==============================================================
@@ -104,18 +109,20 @@ template <class T >
 template <class T>
 void DoublyLinkedList<T>::prepend ( const T &data )
 {
-        Node *newnode = createNewNode(data);
-        //If the head is NULL
-        if(head == nullptr){
-                head = newnode;
-                tail = newnode;
-        }else{
-                Node *ptr = head; //get head
-                //add newnode to the front
-                ptr -> prev = newnode; 
-                newnode -> next = ptr;
-                head = newnode; //update head
-        }
+	Node *newnode = createNewNode(data);
+	//If the head is NULL
+	if(head == nullptr){
+		head = newnode;
+		tail = newnode;
+		size++;
+	}else{
+		Node *ptr = head; //get head
+		//add newnode to the front
+		ptr -> prev = newnode; 
+		newnode -> next = ptr;
+		head = newnode; //update head
+		size++;
+	}
 }
 
 //==============================================================
@@ -129,18 +136,20 @@ void DoublyLinkedList<T>::prepend ( const T &data )
 template <class T>
 void DoublyLinkedList<T>::append ( const T &data )
 {
-        Node *newnode = createNewNode(data);
-        //If the head is NULL
-        if(head == nullptr){
-                head = newnode;
-                tail = newnode;
-        }else{
-                Node *ptr = tail; //get tail
-                //add newnode to the end
-                ptr -> next = newnode;
-                newnode -> prev = ptr;
-                tail = newnode; //update tail
-        }
+	Node *newnode = createNewNode(data);
+	//If the head is NULL
+	if(head == nullptr){
+		head = newnode;
+		tail = newnode;
+		size++;
+	}else{
+		Node *ptr = tail; //get tail
+		//add newnode to the end
+		ptr -> next = newnode;
+		newnode -> prev = ptr;
+		tail = newnode; //update tail
+		size++;
+	}
 }
 
 //insert
@@ -191,10 +200,66 @@ bool DoublyLinkedList<T>::empty ( void ) const
 
 }
 
-//
+//==============================================================
+// operator=
+// Assignment operator
+// PARAMETERS:
+// DoublyLinkedList object
+// RETURN VALUE:
+// new deep copied DoublyLinkedList object
+// *this is returned
+//==============================================================
+template <class T>
+DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &list){
+	//free memory the existing nodes
+	Node *ptr = head;
+    Node *deleting_node;
+    while(ptr != nullptr){
+        deleting_node = ptr;
+        ptr = ptr -> next;
+        delete deleting_node;
+    }
+	size = 0;
+	head = nullptr;
+	ptr = list.head;
+	//create the head
+	if(ptr != nullptr){
+		//create newnode and copy data
+		Node *newnode = createNewNode(ptr -> data);
+		head = newnode;
+		ptr = ptr -> next;
+		size++;
+	}
+	//Creating other nodes
+	Node *track = head;
+	while (ptr != nullptr){
+		Node *newnode = createNewNode(ptr -> data);
+		track -> next = newnode; //link the newnode
+		ptr = ptr -> next;
+		track = track -> next;
+		tail = newnode; //update new tail
+		size++;
+	}
+	
+	return *this;
+}
+//=========================================================
+//concat
+//This method concatenates two existing lists to return a newly created list. 
+//Neither the calling list nor the parameter list get modified.
+//PARAMETERS:
+//- DoublyLinkedList object
+//RETURN VALUE:
+//- new deep copied and concantenated DoublyLinkedList object.
 //=========================================================
 template <class T>
 DoublyLinkedList<T> DoublyLinkedList<T>::concat  (const DoublyLinkedList<T> &list ) const
 {
-
+	DoublyLinkedList<T> newlist(*this);
+	Node *ptr = list.head;
+	while(ptr != nullptr){
+		newlist.append(ptr -> data);
+		ptr = ptr -> next;
+	}
+	return newlist;
 }

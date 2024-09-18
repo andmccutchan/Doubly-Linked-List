@@ -28,4 +28,10 @@ int main(void){
     list2.append(3);
     cout << "list2: " << list2 << endl;
     
+    DoublyLinkedList<int> list3;
+    list3 = list1.concat(list2);
+    cout << list3 << endl;
+    cout << list1 << endl;
+    cout << list2 << endl;
+
 }
