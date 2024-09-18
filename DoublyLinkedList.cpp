@@ -157,7 +157,7 @@ void DoublyLinkedList<T>::append ( const T &data )
 template <class T>
 void DoublyLinkedList<T>::insert ( const T &data, int index )
 {
-    	if (index < 0 || index > length())
+    	if (index < 0 || index > size)
 	{
 		cout << "Index out of range" << endl;
         exit(0);
@@ -189,7 +189,7 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
 template <class T>
 void DoublyLinkedList<T>::remove ( int index )
 {
-    if (index < 0 || index >= length())
+    if (index < 0 || index >= size)
 	{
 		cout << "Index out of range" << endl;
         exit(0);
