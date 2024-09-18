@@ -21,9 +21,9 @@ template <class T>
         typename DoublyLinkedList<T>::Node* DoublyLinkedList<T>::createNewNode(const T &data)
 {
         Node* newnode = new Node;
-        newnode->next = nullptr;
-        newnode->prev = nullptr;
-        newnode->data = data;
+        newnode -> next = nullptr;
+        newnode -> prev = nullptr;
+        newnode -> data = data;
         return newnode;
 }
 //==============================================================
