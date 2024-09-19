@@ -10,15 +10,17 @@ int main(void){
     
     cout << "Create empty double linked list" << endl;
     DoublyLinkedList<int> list1;
-    cout << "list1" << list1 << endl;
+    cout << "list1: " << list1 << endl;
+    cout << "Is list1 empty: " << list1.empty() << endl;
     cout << "Appending 0~5 in list1" << endl;
     for(int i = 0; i <= 5; i ++){
         list1.append(i);
     }
-    cout << "Expected: [0, 1, 2, 3, 4, 5] Result: " << list1 << endl;
+    cout << "Expected: 0, 1, 2, 3, 4, 5 Result: " << list1 << endl;
+    cout << "Is list1 empty: " << list1.empty() << endl;
     list1.prepend(5);
     cout << "prepend 5 to list1" << endl;
-    cout << "Expected: [5, 0, 1, 2, 3, 4, 5] Result: " << list1 << endl;
+    cout << "Expected: 5, 0, 1, 2, 3, 4, 5 Result: " << list1 << endl;
     
     cout << "\nTest copy constructor" << endl;
     cout << "list1: " << list1 << endl;

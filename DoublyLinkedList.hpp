@@ -46,7 +46,6 @@ class DoublyLinkedList
         friend ostream & operator<< (ostream &os, DoublyLinkedList<T> &list)
         {
             Node *ptr = list.head;
-            os << "[";
             while (ptr != NULL)
             {
                 if (ptr -> next != NULL){
@@ -57,7 +56,6 @@ class DoublyLinkedList
                 }
                 ptr = ptr -> next;
             }
-            os << "]";
             return os;	
         }
 };
