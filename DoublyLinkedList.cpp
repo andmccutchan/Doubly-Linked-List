@@ -152,52 +152,170 @@ void DoublyLinkedList<T>::append ( const T &data )
 	}
 }
 
+//=========================================================
 //insert
+//This method allows to you add an item at the location specified by index
+//PARAMETERS:
+//- data: new data of type T that is inserted
+//- index: the index where the data is inserted
+//RETURN VALUE:
+//- none, list is changed by inserting a new variable
 //=========================================================
 template <class T>
 void DoublyLinkedList<T>::insert ( const T &data, int index )
 {
+    if (index < 0 || index > length()) {
+        throw out_of_range("Index out of range");
+    }
+    
+    if (index == 0) {
+        prepend(data);
+        return;
+    }
 
+    if (index == length()) {
+        append(data);
+        return;
+    }
+
+    Node *ptr = head;
+    for (int i = 0; i < index - 1; i++) {
+        ptr = ptr->next;
+    }
+
+    Node *newnode = createNewNode(data);
+
+    newnode->next = ptr->next;
+    newnode->prev = ptr;
+    ptr->next->prev = newnode;
+    ptr->next = newnode;
+	size++;
+	
 }
 
-//
+//=========================================================
+//remove
+//This method removes the item at the position specified by index
+//PARAMETERS:
+//- index: index of data to be removed
+//RETURN VALUE:
+//- none: DoublyLinkedList has variable removed
 //=========================================================
 template <class T>
 void DoublyLinkedList<T>::remove ( int index )
 {
-    
+    if (index < 0 || index >= length()) {
+        throw out_of_range("Index out of range");
+    }
+    Node *ptr;
+    if (index == 0) {
+		ptr = head;
+        head = head->next;
+        if (head != nullptr) {
+            head->prev = nullptr;
+        } else {
+            tail = nullptr;
+        }
+    }
+	else if (index == length() - 1) {
+		ptr = tail;
+		tail = tail->prev;
+		if (tail != nullptr) {
+			tail->next = nullptr;
+		} else {
+			head = nullptr;
+		}
+	}
+	else {
+		ptr = head;
+		for (int i = 0; i < index; i++) {
+			ptr = ptr->next;
+		}
+		ptr->prev->next = ptr->next;
+		ptr->next->prev = ptr->prev;
+	}
+    delete ptr;
+	size--;
 }
 
-//
+//=========================================================
+//search
+//This method finds the index of the first instance of data in the DoublyLinkedList
+//PARAMETERS:
+//- data: the data to search for in the DoublyLinkedList
+//RETURN VALUE:
+//- integer of index containing node, -1 if not found
 //=========================================================
 template <class T>
 int DoublyLinkedList<T>::search ( const T &data ) const
 {
-    
+    Node *ptr = head;
+    int index = 0;
+
+    while (ptr != nullptr) {
+        if (ptr->data == data) {
+            return index;
+        }
+        ptr = ptr->next;
+        index++;
+    }
+
+    return -1;
 }
 
-//
+//=========================================================
+//operator[]
+//This methods returns a reference to the data at the position specified by index
+//PARAMETERS:
+//index: index of the node
+//RETURN VALUE:
+//- reference to the data at the specified index
 //=========================================================
 template <class T>
 T & DoublyLinkedList<T>::operator[] ( int index )
 {
+    if (index < 0 || index >= length()) {
+        throw out_of_range("Index out of range");
+    }
 
+    Node *ptr = head;
+	int traverse_index = 0;
+    while (ptr != nullptr && traverse_index < index) {
+        ptr = ptr->next;
+        traverse_index++;
+    }
+	
+    return ptr->data;
 }
 
-//
+//=========================================================
+//length
+//This method returns the number of elements in the DoublyLinkedList.
+//PARAMETERS:
+//none
+//RETURN VALUE:
+//- integer value of number of nodes in the DoublyLinkedList
 //=========================================================
 template <class T>
 int DoublyLinkedList<T>::length ( void ) const
 {
-
+    return size;
 }
 
-//
+
+//=========================================================
+//empty
+//This method returns true if the DoublyLinkedList is empty and returns 
+//false otherwise
+//PARAMETERS:
+//none
+//RETURN VALUE:
+//- returns true if the DoublyLinkedList is empty, false otherwise
 //=========================================================
 template <class T>
 bool DoublyLinkedList<T>::empty ( void ) const
 {
-
+	return head == nullptr;
 }
 
 //==============================================================
