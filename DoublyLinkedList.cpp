@@ -63,6 +63,7 @@ template <class T>
 		//create newnode and copy data
 		Node *newnode = createNewNode(ptr -> data);
 		head = newnode;
+		tail = newnode;
 		ptr = ptr -> next;
 		size++;
 	}
