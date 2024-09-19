@@ -111,7 +111,7 @@ void DoublyLinkedList<T>::prepend ( const T &data )
 {
 	Node *newnode = createNewNode(data);
 	//If the head is NULL
-	if(head == nullptr){
+	if(head == nullptr){  //prepend to an empty list
 		head = newnode;
 		tail = newnode;
 		size++;
@@ -138,7 +138,7 @@ void DoublyLinkedList<T>::append ( const T &data )
 {
 	Node *newnode = createNewNode(data);
 	//If the head is NULL
-	if(head == nullptr){
+	if(head == nullptr){  //appends to an empty list
 		head = newnode;
 		tail = newnode;
 		size++;
@@ -185,9 +185,9 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
 
     Node *newnode = createNewNode(data);
 
-    newnode->next = ptr->next;
+    newnode->next = ptr->next;  //adjusts the pointers of newNode to match to the next and previous pounter
     newnode->prev = ptr;
-    ptr->next->prev = newnode;
+    ptr->next->prev = newnode;  //adjusts the nodes before and after the new node to make their pointers point to the new node
     ptr->next = newnode;
 	size++;
 	
@@ -208,7 +208,7 @@ void DoublyLinkedList<T>::remove ( int index )
         throw out_of_range("Index out of range");
     }
     Node *ptr;
-    if (index == 0) {
+    if (index == 0) { //check if given index is the first index of the list
 		ptr = head;
         head = head->next;
         if (head != nullptr) {
@@ -217,7 +217,7 @@ void DoublyLinkedList<T>::remove ( int index )
             tail = nullptr;
         }
     }
-	else if (index == length() - 1) {
+	else if (index == length() - 1) { //check if index is the last index of the list
 		ptr = tail;
 		tail = tail->prev;
 		if (tail != nullptr) {
@@ -227,8 +227,8 @@ void DoublyLinkedList<T>::remove ( int index )
 		}
 	}
 	else {
-		ptr = head;
-		for (int i = 0; i < index; i++) {
+		ptr = head;  
+		for (int i = 0; i < index; i++) {  // every other instance
 			ptr = ptr->next;
 		}
 		ptr->prev->next = ptr->next;
@@ -253,7 +253,7 @@ int DoublyLinkedList<T>::search ( const T &data ) const
     int index = 0;
 
     while (ptr != nullptr) {
-        if (ptr->data == data) {
+        if (ptr->data == data) {  //linearlly searches the list for the first instance of the given data
             return index;
         }
         ptr = ptr->next;
@@ -280,7 +280,7 @@ T & DoublyLinkedList<T>::operator[] ( int index )
 
     Node *ptr = head;
 	int traverse_index = 0;
-    while (ptr != nullptr && traverse_index < index) {
+    while (ptr != nullptr && traverse_index < index) { 
         ptr = ptr->next;
         traverse_index++;
     }
@@ -330,7 +330,7 @@ bool DoublyLinkedList<T>::empty ( void ) const
 template <class T>
 DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &list){
 	//free memory the existing nodes
-	Node *ptr = head;
+	Node *ptr = head;			//destructor 
     Node *deleting_node;
     while(ptr != nullptr){
         deleting_node = ptr;
@@ -338,7 +338,7 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &l
         delete deleting_node;
     }
 	size = 0;
-	head = nullptr;
+	head = nullptr;					//copy constructor
 	ptr = list.head;
 	//create the head
 	if(ptr != nullptr){
@@ -359,7 +359,7 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &l
 		size++;
 	}
 	
-	return *this;
+	return *this;		//return the object
 }
 //=========================================================
 //concat
@@ -373,7 +373,7 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &l
 template <class T>
 DoublyLinkedList<T> DoublyLinkedList<T>::concat  (const DoublyLinkedList<T> &list ) const
 {
-	DoublyLinkedList<T> newlist(*this);
+	DoublyLinkedList<T> newlist(*this);  //creates new list 
 	Node *ptr = list.head;
 	while(ptr != nullptr){
 		newlist.append(ptr -> data);
