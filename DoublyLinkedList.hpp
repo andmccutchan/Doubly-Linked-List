@@ -1,7 +1,7 @@
 // DoublyLinkedList.hpp
 // Andrew McCutchan, Jin Seok Youn, Beck Robins
-// 09/19/2024
-// Contains the header file contents
+// 09/20/2024
+// Contains the header file contents of DoublyLinkedList class
 //=========================================================
 
 #include <iostream>
@@ -41,8 +41,7 @@ class DoublyLinkedList
         DoublyLinkedList<T> operator= (const DoublyLinkedList<T> &list);
         DoublyLinkedList<T> concat  (const DoublyLinkedList<T> &list) const;
 
-
-        //friend function to overload the << operator to display our list 
+        //friend function to overload the << operator to display DoublyLinkedList 
         friend ostream & operator<< (ostream &os, DoublyLinkedList<T> &list)
         {
             Node *ptr = list.head;

@@ -1,13 +1,12 @@
 // DoublyLinkedList.cpp
 // Andrew McCutchan, Jin Seok Youn, Beck Robins
-// 09/19/2024
-// Contains the main class method implementations.
+// 09/20/2024
+// Contains the main DoublyLinkedList class method implementations.
 //=========================================================
 
 #include <iostream>
 #include "DoublyLinkedList.hpp"
 using namespace std;
-
 
 //==============================================================
 //createNewNode
@@ -108,7 +107,7 @@ template <class T >
 //- none, changes the list by adding a new data on the front.
 //=========================================================
 template <class T>
-void DoublyLinkedList<T>::prepend ( const T &data )
+		void DoublyLinkedList<T>::prepend ( const T &data )
 {
 	Node *newnode = createNewNode(data);
 	//If the head is NULL
@@ -135,7 +134,7 @@ void DoublyLinkedList<T>::prepend ( const T &data )
 //- none, changes the list by adding a new data on the end.
 //==============================================================
 template <class T>
-void DoublyLinkedList<T>::append ( const T &data )
+		void DoublyLinkedList<T>::append ( const T &data )
 {
 	Node *newnode = createNewNode(data);
 	//If the head is NULL
@@ -158,12 +157,12 @@ void DoublyLinkedList<T>::append ( const T &data )
 //This method allows to you add an item at the location specified by index
 //PARAMETERS:
 //- data: new data of type T that is inserted
-//- index: the index where the data is inserted
+//- index, int: the index where the data is inserted
 //RETURN VALUE:
 //- none, list is changed by inserting a new variable
 //=========================================================
 template <class T>
-void DoublyLinkedList<T>::insert ( const T &data, int index )
+		void DoublyLinkedList<T>::insert ( const T &data, int index )
 {
     if (index < 0 || index > length()) {
         throw out_of_range("Index out of range");
@@ -198,12 +197,12 @@ void DoublyLinkedList<T>::insert ( const T &data, int index )
 //remove
 //This method removes the item at the position specified by index
 //PARAMETERS:
-//- index: index of data to be removed
+//- index, int: index of data to be removed
 //RETURN VALUE:
 //- none: DoublyLinkedList has variable removed
 //=========================================================
 template <class T>
-void DoublyLinkedList<T>::remove ( int index )
+		void DoublyLinkedList<T>::remove ( int index )
 {
     if (index < 0 || index >= length()) {
         throw out_of_range("Index out of range");
@@ -243,12 +242,12 @@ void DoublyLinkedList<T>::remove ( int index )
 //search
 //This method finds the index of the first instance of data in the DoublyLinkedList
 //PARAMETERS:
-//- data: the data to search for in the DoublyLinkedList
+//- data: the data of type T to search for in the DoublyLinkedList
 //RETURN VALUE:
 //- integer of index containing node, -1 if not found
 //=========================================================
 template <class T>
-int DoublyLinkedList<T>::search ( const T &data ) const
+		int DoublyLinkedList<T>::search ( const T &data ) const
 {
     Node *ptr = head;
     int index = 0;
@@ -268,12 +267,12 @@ int DoublyLinkedList<T>::search ( const T &data ) const
 //operator[]
 //This methods returns a reference to the data at the position specified by index
 //PARAMETERS:
-//index: index of the node
+//index, int: index of the node
 //RETURN VALUE:
 //- reference to the data at the specified index
 //=========================================================
 template <class T>
-T & DoublyLinkedList<T>::operator[] ( int index )
+		T & DoublyLinkedList<T>::operator[] ( int index )
 {
     if (index < 0 || index >= length()) {
         throw out_of_range("Index out of range");
@@ -298,7 +297,7 @@ T & DoublyLinkedList<T>::operator[] ( int index )
 //- integer value of number of nodes in the DoublyLinkedList
 //=========================================================
 template <class T>
-int DoublyLinkedList<T>::length ( void ) const
+		int DoublyLinkedList<T>::length ( void ) const
 {
     return size;
 }
@@ -311,10 +310,10 @@ int DoublyLinkedList<T>::length ( void ) const
 //PARAMETERS:
 //none
 //RETURN VALUE:
-//- returns true if the DoublyLinkedList is empty, false otherwise
+//- returns true if the DoublyLinkedList is empty, false otherwise (bool)
 //=========================================================
 template <class T>
-bool DoublyLinkedList<T>::empty ( void ) const
+		bool DoublyLinkedList<T>::empty ( void ) const
 {
 	return head == nullptr;
 }
@@ -329,7 +328,7 @@ bool DoublyLinkedList<T>::empty ( void ) const
 // *this is returned
 //==============================================================
 template <class T>
-DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &list){
+		DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &list){
 	//free memory the existing nodes
 	Node *ptr = head;			//destructor 
     Node *deleting_node;
@@ -346,6 +345,7 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &l
 		//create newnode and copy data
 		Node *newnode = createNewNode(ptr -> data);
 		head = newnode;
+		tail = newnode;
 		ptr = ptr -> next;
 		size++;
 	}
@@ -372,7 +372,7 @@ DoublyLinkedList<T> DoublyLinkedList<T>::operator= (const DoublyLinkedList<T> &l
 //- new deep copied and concantenated DoublyLinkedList object.
 //=========================================================
 template <class T>
-DoublyLinkedList<T> DoublyLinkedList<T>::concat  (const DoublyLinkedList<T> &list ) const
+		DoublyLinkedList<T> DoublyLinkedList<T>::concat  (const DoublyLinkedList<T> &list ) const
 {
 	DoublyLinkedList<T> newlist(*this);  //creates new list 
 	Node *ptr = list.head;
