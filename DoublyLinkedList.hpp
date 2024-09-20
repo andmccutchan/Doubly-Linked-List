@@ -46,9 +46,9 @@ class DoublyLinkedList
         friend ostream & operator<< (ostream &os, DoublyLinkedList<T> &list)
         {
             Node *ptr = list.head;
-            while (ptr != NULL)
+            while (ptr != nullptr)
             {
-                if (ptr -> next != NULL){
+                if (ptr -> next != nullptr){
                     os << ptr -> data << ", ";
                 }
                 else{
