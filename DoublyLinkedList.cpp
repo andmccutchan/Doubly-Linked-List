@@ -1,6 +1,6 @@
 // DoublyLinkedList.cpp
 // Andrew McCutchan, Jin Seok Youn, Beck Robins
-// 09/13/2024
+// 09/19/2024
 // Contains the main class method implementations.
 //=========================================================
 
@@ -13,9 +13,9 @@ using namespace std;
 //createNewNode
 //Helper function to create new node with data
 //PARAMETERS: 
-//- data : a new data of type T to prepend
+//- data : a new data of type T for new node.
 //RETURN VALUE:
-//- newnode, pointer to the newnode that had been made.
+//- newnode: Node*, pointer to the newnode that had been made.
 //==============================================================
 template <class T>
         typename DoublyLinkedList<T>::Node* DoublyLinkedList<T>::createNewNode(const T &data)

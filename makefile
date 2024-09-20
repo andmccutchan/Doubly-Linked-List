@@ -1,7 +1,7 @@
-mytests: list myTests.cpp DoublyLinkedList.hpp DoublyLinkedList.cpp
-	g++ -c myTests.cpp -o myTests.o
-	g++ -o myTests doublylinkedlist.o myTests.o
-	./myTests
+mytests: list mytests.cpp DoublyLinkedList.hpp DoublyLinkedList.cpp
+	g++ -c mytests.cpp -o mytests.o
+	g++ -o mytests doublylinkedlist.o mytests.o
+	./mytests
 
 list: DoublyLinkedList.hpp DoublyLinkedList.cpp
 	g++ -c DoublyLinkedList.cpp -o doublylinkedlist.o

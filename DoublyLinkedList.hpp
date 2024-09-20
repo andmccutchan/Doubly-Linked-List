@@ -1,6 +1,6 @@
 // DoublyLinkedList.hpp
 // Andrew McCutchan, Jin Seok Youn, Beck Robins
-// 09/13/2024
+// 09/19/2024
 // Contains the header file contents
 //=========================================================
 
